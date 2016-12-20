@@ -101,7 +101,7 @@ module Test.TimeIntervals where
   runTests = do
     putStrLn "Running tests for module TimeIntervals"
     putStrLn "Correct implementation:"
-    testFunction reduceOverlapping
+    testFunction simplifyTimes
     putStrLn "Incorrect implementations:"
     testFunction incorrectFn1
     testFunction incorrectFn2

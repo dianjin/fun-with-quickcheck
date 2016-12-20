@@ -29,22 +29,24 @@ module TimeIntervals where
         -- create new firstChunk
         groupAdjacentsRecur fn xs ([x]:acc) x
 
-
   groupAdjacents :: (TimeInterval -> TimeInterval -> Bool) -> [TimeInterval] -> [[TimeInterval]]
   groupAdjacents _ [] =
     []
   groupAdjacents fn (x:xs) =
     groupAdjacentsRecur fn xs [[x]] x
 
+  {- Correct implementation -}
 
-  reduceOverlapping :: [TimeInterval] -> [TimeInterval]
-  reduceOverlapping inputTimes = combined
+  simplifyTimes :: [TimeInterval] -> [TimeInterval]
+  simplifyTimes inputTimes = combined
     where
       sorted = sortBy (comparing fst) inputTimes
       grouped = groupAdjacents overlapping sorted
       maxEndTime times = maximum (map snd times)
       combine rs = (fst (head rs), maxEndTime rs)
       combined = map combine grouped
+
+  {- Incorrect implementations -}
 
   incorrectFn1 :: [TimeInterval] -> [TimeInterval]
   incorrectFn1 inputTimes = combined
